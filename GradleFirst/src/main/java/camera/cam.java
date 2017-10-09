@@ -3,10 +3,12 @@ package camera;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.FFmpegFrameRecorder;
 import org.bytedeco.javacv.Frame;
+import org.bytedeco.javacv.FrameGrabber;
+import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameGrabber;
 import org.bytedeco.javacpp.avutil;
-import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacpp.*;
+import org.bytedeco.javacpp.opencv_core.IplImage;
+
 
 public class cam {
 
@@ -16,6 +18,13 @@ public class cam {
 	        OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
 	        grabber.start();
 	        Frame grabbedImage = grabber.grab();
+	        
+	        //FrameGrabber fGrabber = FrameGrabber.createDefault(0);
+	        //fGrabber.start();
+	        OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
+	        //IplImage fGrabbedImage = converter.convert(fGrabber.grab());
+	        //int width = fGrabbedImage.width();
+	        //int height = fGrabbedImage.height();
 
 	        CanvasFrame canvasFrame = new CanvasFrame("Cam");
 	        canvasFrame.setCanvasSize(grabbedImage.imageWidth, grabbedImage.imageHeight);
@@ -36,7 +45,9 @@ public class cam {
 	            recorder.record(grabbedImage);
 	        }
 	        recorder.stop();
+	        recorder.close();
 	        grabber.stop();
+	        grabber.close();
 	        canvasFrame.dispose();
 	    }
 }
