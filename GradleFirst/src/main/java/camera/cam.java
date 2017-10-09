@@ -18,7 +18,7 @@ public class cam {
 	        OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
 	        grabber.start();
 	        Frame grabbedImage = grabber.grab();
-	        
+	        //
 	        //FrameGrabber fGrabber = FrameGrabber.createDefault(0);
 	        //fGrabber.start();
 	        OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
